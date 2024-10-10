@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Game/Code/Editor/BehaviourTree/BehaviourTreeEditor.uss?fileID=7433441132597879392&amp;guid=6eac7257a97f0034392d156dfaaf56c1&amp;type=3#BehaviourTreeEditor" />
+    <HauntSlayer.Editor.BehaviourTree.SplitView>
+        <ui:VisualElement style="flex-grow: 1; background-color: rgb(32, 32, 32); width: 127px;">
+            <ui:Label tabindex="-1" text="Inspector" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; background-color: rgb(25, 25, 25);" />
+            <HauntSlayer.Editor.BehaviourTree.InspectorView />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1;">
+            <ui:Label tabindex="-1" text="Tree View" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; background-color: rgb(25, 25, 25);" />
+            <HauntSlayer.Editor.BehaviourTree.BehaviourTreeView style="flex-grow: 1;" />
+        </ui:VisualElement>
+    </HauntSlayer.Editor.BehaviourTree.SplitView>
+</ui:UXML>

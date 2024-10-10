@@ -12,6 +12,8 @@ namespace HauntSlayer.Core.BehaviourTree
             Failure
         }
 
+        public string guid;
+
         public State state = State.Running;
         
         protected bool hasStarted = false;

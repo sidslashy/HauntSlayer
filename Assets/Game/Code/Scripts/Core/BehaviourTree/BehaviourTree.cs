@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
 
 namespace HauntSlayer.Core.BehaviourTree
 {
@@ -7,6 +9,7 @@ namespace HauntSlayer.Core.BehaviourTree
     {
         public BTNode rootNode;
         public BTNode.State treeState = BTNode.State.Running;
+        public List<BTNode> nodes;
 
         public BTNode.State Update()
         {
@@ -16,6 +19,26 @@ namespace HauntSlayer.Core.BehaviourTree
             }
             
             return treeState;
+        }
+
+        public BTNode CreateNode(System.Type type)
+        {
+            BTNode node = ScriptableObject.CreateInstance(type) as BTNode;
+            node.name = type.Name;
+            node.guid = GUID.Generate().ToString();
+            nodes.Add(node);
+            
+            AssetDatabase.AddObjectToAsset(node, this);
+            AssetDatabase.SaveAssets();
+            return node;
+        }
+
+        public void DeleteNode(BTNode node)
+        {
+            nodes.Remove(node);
+            AssetDatabase.RemoveObjectFromAsset(node);
+            AssetDatabase.SaveAssets();
+
         }
     }
 }

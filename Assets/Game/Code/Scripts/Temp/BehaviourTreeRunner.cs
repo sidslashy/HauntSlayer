@@ -15,18 +15,20 @@ namespace Game.Code.Scripts.Temp
 
             var log = ScriptableObject.CreateInstance<LogNode>();
             log.logMessage = "Hello BT :D ";
+            var log1Wait = ScriptableObject.CreateInstance<WaitNode>();
             
             var log2 = ScriptableObject.CreateInstance<LogNode>();
             log2.logMessage = "MSG 2 ";
+            var log2Wait = ScriptableObject.CreateInstance<WaitNode>();
             
             var sequencer = ScriptableObject.CreateInstance<SequencerNode>();
-            sequencer.children = new List<BTNode> {log,log2};
+            sequencer.children = new List<BTNode> {log,log1Wait,log2,log2Wait};
             
-            // var repeat = ScriptableObject.CreateInstance<RepeatNode>();
-            // repeat.child = log;
-            // repeat.isEndless = true;
+            var repeat = ScriptableObject.CreateInstance<RepeatNode>();
+            repeat.child = sequencer;
+            repeat.isEndless = true;
 
-            bt.rootNode = sequencer;
+            bt.rootNode = repeat;
         }
 
         void Update()
