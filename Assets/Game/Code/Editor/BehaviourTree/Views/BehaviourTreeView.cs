@@ -10,10 +10,10 @@ namespace HauntSlayer.Editor.BehaviourTree
     {
         public new class UxmlFactory : UxmlFactory<BehaviourTreeView, UxmlTraits> { }
 
-        public Core.BehaviourTree.BehaviourTree _tree;
+        public Core.BehaviourTree.BehaviourTree tree;
         public BehaviourTreeView()
         {
-            Add(new GridBackground());
+            Insert(0,new GridBackground());
             
             this.AddManipulator(new ContentZoomer());
             this.AddManipulator(new ContentDragger());
@@ -29,7 +29,7 @@ namespace HauntSlayer.Editor.BehaviourTree
 
         public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
         {
-            //base.BuildContextualMenu(evt);
+            base.BuildContextualMenu(evt);
             {
                 var types = TypeCache.GetTypesDerivedFrom<ActionNode>();
                 foreach (var type in types)
@@ -60,16 +60,38 @@ namespace HauntSlayer.Editor.BehaviourTree
         // TODO: Figure out why is the class being imported like this.
         public void PopulateView(Core.BehaviourTree.BehaviourTree tree)
         {
-            DeleteElements(graphElements);
+            this.tree = tree;
 
+            graphViewChanged -= OnGraphViewChanged;
+            DeleteElements(graphElements);
+            graphViewChanged += OnGraphViewChanged;
+  
             tree.nodes.ForEach(n => CreateNodeView(n));
 
-            _tree = tree;
+            
+        }
+
+        private GraphViewChange OnGraphViewChanged(GraphViewChange graphviewchange)
+        {
+            if (graphviewchange.elementsToRemove != null)
+            {
+                graphviewchange.elementsToRemove.ForEach(elem =>
+                {
+                    NodeView nodeView = elem as NodeView;
+                    if (nodeView != null)
+                    {
+                        tree.DeleteNode(nodeView.node);
+                    }
+                });
+                
+            }
+
+            return graphviewchange;
         }
 
         public void CreateNode(Type type)
         {
-            BTNode node = _tree.CreateNode(type);
+            BTNode node = tree.CreateNode(type);
             CreateNodeView(node);
         }
 
