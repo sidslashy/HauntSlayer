@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -16,9 +18,19 @@ namespace HauntSlayer.Editor.BehaviourTree
         {
             BehaviourTreeEditor wnd = GetWindow<BehaviourTreeEditor>();
             wnd.titleContent = new GUIContent("Behaviour Tree Editor");
+            
+
         }
-        
-        
+
+        private void OnEnable()
+        {
+            // Auto close window incase editor reopens, this is to prevent blank graph editor window from opening.
+            if (treeView == null)
+            {
+                Close();
+            }
+        }
+
         public static void Open(Core.BehaviourTree.BehaviourTree target)
         {
             // Check if window already open
@@ -32,6 +44,8 @@ namespace HauntSlayer.Editor.BehaviourTree
             window.titleContent = new GUIContent($"{target.name}",
                 EditorGUIUtility.GetIconForObject(target));
             window.Load(target);
+            
+            
         }
 
         public void CreateGUI()
@@ -41,6 +55,15 @@ namespace HauntSlayer.Editor.BehaviourTree
 
             // Instantiate UXML
             m_VisualTreeAsset.CloneTree(root);
+            
+            // EditorApplication.quitting -= CloseWindow;
+            // EditorApplication.quitting += CloseWindow;
+            //
+            // void CloseWindow()
+            // {
+            //    Close();
+            // }
+            
         }
 
         private void OnSelectionChange()

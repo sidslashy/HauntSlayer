@@ -1,5 +1,6 @@
 ﻿using System;
 using HauntSlayer.Core.BehaviourTree;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
@@ -55,9 +56,7 @@ namespace HauntSlayer.Editor.BehaviourTree
             }
           
         }
-
-
-        // TODO: Figure out why is the class being imported like this.
+        
         public void PopulateView(Core.BehaviourTree.BehaviourTree tree)
         {
             this.tree = tree;
@@ -66,16 +65,20 @@ namespace HauntSlayer.Editor.BehaviourTree
             DeleteElements(graphElements);
             graphViewChanged += OnGraphViewChanged;
   
-            tree.nodes.ForEach(n => CreateNodeView(n));
+            tree.nodes.ForEach(CreateNodeView);
 
             
         }
 
-        private GraphViewChange OnGraphViewChanged(GraphViewChange graphviewchange)
+        private GraphViewChange OnGraphViewChanged(GraphViewChange graphChanges)
         {
-            if (graphviewchange.elementsToRemove != null)
+            // from Unity's side
+            focusable = true; 
+            Focus();
+            
+            if (graphChanges.elementsToRemove != null)
             {
-                graphviewchange.elementsToRemove.ForEach(elem =>
+                graphChanges.elementsToRemove.ForEach(elem =>
                 {
                     NodeView nodeView = elem as NodeView;
                     if (nodeView != null)
@@ -83,19 +86,20 @@ namespace HauntSlayer.Editor.BehaviourTree
                         tree.DeleteNode(nodeView.node);
                     }
                 });
-                
             }
+            
+            //if(graphChanges.)
 
-            return graphviewchange;
+            return graphChanges;
         }
 
-        public void CreateNode(Type type)
+        private void CreateNode(Type type)
         {
             BTNode node = tree.CreateNode(type);
             CreateNodeView(node);
         }
 
-        public void CreateNodeView(BTNode node)
+        private void CreateNodeView(BTNode node)
         {
             var nodeView = new NodeView(node);
             AddElement(nodeView);

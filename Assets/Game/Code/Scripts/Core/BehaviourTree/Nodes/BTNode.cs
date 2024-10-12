@@ -12,6 +12,7 @@ namespace HauntSlayer.Core.BehaviourTree
             Failure
         }
 
+        public Vector2 position;
         public string guid;
 
         public State state = State.Running;

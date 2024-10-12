@@ -1,5 +1,6 @@
 ﻿using HauntSlayer.Core.BehaviourTree;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 
 namespace HauntSlayer.Editor.BehaviourTree
 {
@@ -11,6 +12,18 @@ namespace HauntSlayer.Editor.BehaviourTree
         {
             this.node = node;
             title = node.name;
+            viewDataKey = node.guid;
+
+            style.left = node.position.x;
+            style.top = node.position.y;
+
+        }
+
+        public override void SetPosition(Rect newPos)
+        {
+            node.position.x = newPos.xMin;
+            node.position.y = newPos.yMin;
+            base.SetPosition(newPos);
         }
     }
 }
