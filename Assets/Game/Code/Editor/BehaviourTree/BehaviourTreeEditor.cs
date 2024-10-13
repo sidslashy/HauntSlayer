@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -20,8 +21,6 @@ namespace HauntSlayer.Editor.BehaviourTree
         {
             BehaviourTreeEditor wnd = GetWindow<BehaviourTreeEditor>();
             wnd.titleContent = new GUIContent("Behaviour Tree Editor");
-            
-
         }
 
         private void OnEnable()
@@ -37,7 +36,7 @@ namespace HauntSlayer.Editor.BehaviourTree
         {
             if (!target)
                 return;
-
+            
             _isOpenTriggered = true;
             
             // Check if window already open
@@ -61,17 +60,11 @@ namespace HauntSlayer.Editor.BehaviourTree
             VisualElement root = rootVisualElement;
 
             // Instantiate UXML
-            m_VisualTreeAsset.CloneTree(root);
+            m_VisualTreeAsset.CloneTree(root); 
+            
+            treeView = root.Q<BehaviourTreeView>();
+            inspectorView = root.Q<InspectorView>();
         }
-
-        // private void OnSelectionChange()
-        // {
-        //     Core.BehaviourTree.BehaviourTree tree = Selection.activeObject as Core.BehaviourTree.BehaviourTree;
-        //     if (tree)
-        //     {
-        //         FocusOpenWindow(tree);
-        //     }
-        // }
 
         private static bool FocusOpenWindow(Core.BehaviourTree.BehaviourTree tree)
         {
@@ -84,18 +77,12 @@ namespace HauntSlayer.Editor.BehaviourTree
                     return true;
                 }
             }
-
             return false;
         }
 
 
         private void Load(Core.BehaviourTree.BehaviourTree target)
         {
-            VisualElement root = rootVisualElement;
-            
-            treeView = root.Q<BehaviourTreeView>();
-            inspectorView = root.Q<InspectorView>();
-            
             treeView.PopulateView(target);
         }
     }

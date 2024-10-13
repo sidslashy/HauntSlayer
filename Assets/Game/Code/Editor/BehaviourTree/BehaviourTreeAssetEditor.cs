@@ -1,32 +1,25 @@
 ﻿using UnityEditor;
-using UnityEngine;
+using UnityEditor.Callbacks;
 
 namespace HauntSlayer.Editor.BehaviourTree
 {
     [CustomEditor(typeof(Core.BehaviourTree.BehaviourTree))]
     public class BehaviourTreeAssetEditor : UnityEditor.Editor
     {
-        
-        private void OnEnable()
+        // Add double click to open asset from SO
+        [OnOpenAsset(1)]
+        public static bool OnOpenAsset(int instanceID, int line)
         {
-            // // Check if the selected object is a CustomData instance
-            // CustomData data = (CustomData)target;
-            //
-            // // Open the custom editor window
-            // CustomDataEditorWindow.Open(data);
-            
-            BehaviourTreeEditor.Open((Core.BehaviourTree.BehaviourTree)target);
-        }
-        
-        public override void OnInspectorGUI()
-        {
-            
-            base.OnInspectorGUI();
-            
-            // if (GUILayout.Button("Open"))
-            // {
-            //     BehaviourTreeEditor.Open((Core.BehaviourTree.BehaviourTree)target);
-            // }
+            // Get the object being opened
+            var obj = EditorUtility.InstanceIDToObject(instanceID);
+            if (obj is Core.BehaviourTree.BehaviourTree customData)
+            {
+                // Open the custom editor window
+                BehaviourTreeEditor.Open(customData);
+                return true; // Return true to prevent default behavior
+            }
+
+            return false; // Return false to allow default behavior for other assets
         }
     }
 }

@@ -32,7 +32,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64277fadad5d409fa7a8174d7a049061, type: 3}
   m_Name: LogNode
   m_EditorClassIdentifier: 
-  position: {x: 284, y: 107}
+  position: {x: 257, y: 277}
   guid: a30f723e33b560e4792a6d6064855f82
   state: 0
   logMessage: 
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62cd990749af43159d5995c500bcda98, type: 3}
   m_Name: RepeatNode
   m_EditorClassIdentifier: 
-  position: {x: 337.96, y: 220.4}
+  position: {x: 762, y: 148}
   guid: e2ef7409d4efccd449512d505a1273ec
   state: 0
   child: {fileID: 0}
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64277fadad5d409fa7a8174d7a049061, type: 3}
   m_Name: LogNode
   m_EditorClassIdentifier: 
-  position: {x: 284, y: 27}
+  position: {x: 653, y: 148}
   guid: b4062fe2f7f59bb49977ffd09f78a0a2
   state: 0
   logMessage: 
@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64277fadad5d409fa7a8174d7a049061, type: 3}
   m_Name: LogNode
   m_EditorClassIdentifier: 
-  position: {x: 407, y: 107}
+  position: {x: 470, y: 277}
   guid: 11a8b392f1e660441ad70722480124d5
   state: 0
   logMessage: 
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64277fadad5d409fa7a8174d7a049061, type: 3}
   m_Name: LogNode
   m_EditorClassIdentifier: 
-  position: {x: 407, y: 27}
+  position: {x: 372, y: 277}
   guid: b6037cb7c0a38dd48bbd2ba56cb77e61
   state: 0
   logMessage: 

@@ -28,7 +28,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62cd990749af43159d5995c500bcda98, type: 3}
   m_Name: RepeatNode
   m_EditorClassIdentifier: 
-  position: {x: 321, y: 253}
+  position: {x: 322, y: 253}
   guid: 616582a8e24a2e84bb9253551a1c4e6a
   state: 0
   child: {fileID: 0}
