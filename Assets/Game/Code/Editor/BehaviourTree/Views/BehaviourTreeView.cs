@@ -62,7 +62,6 @@ namespace HauntSlayer.Editor.BehaviourTree
             this.tree = tree;
 
             graphViewChanged -= OnGraphViewChanged;
-            DeleteElements(graphElements);
             graphViewChanged += OnGraphViewChanged;
   
             tree.nodes.ForEach(CreateNodeView);
@@ -88,8 +87,6 @@ namespace HauntSlayer.Editor.BehaviourTree
                 });
             }
             
-            //if(graphChanges.)
-
             return graphChanges;
         }
 

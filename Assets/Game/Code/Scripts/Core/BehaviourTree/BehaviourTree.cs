@@ -31,18 +31,8 @@ namespace HauntSlayer.Core.BehaviourTree
 
             AssetDatabase.AddObjectToAsset(node, this);
             AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
             return node;
-            
-            
-            // else{             BehaviourTreeSO newtree = ScriptableObject.CreateInstance("BehaviourTreeSO") as BehaviourTreeSO;
-            //     string path = $"Assets/DEBUGTREE.asset";
-            //     AssetDatabase.CreateAsset(newtree, path);
-            //     // AssetDatabase.AddObjectToAsset(newtree, newtree);
-            //     AssetDatabase.Refresh();
-            //     EditorUtility.SetDirty(newtree);
-            //     AssetDatabase.SaveAssets();
-            //     tree = newtree;   } 
-
         }
 
         public void DeleteNode(BTNode node)
